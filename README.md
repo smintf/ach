@@ -7,7 +7,7 @@
 </h1>
 
 
-<h4 align="center">Another Cheat for AssaultCube</h4>
+<h4 align="center">Another External Cheat for AssaultCube</h4>
 
 <p align="center">
   <a href="https://https://github.com/smintf/ach/">
