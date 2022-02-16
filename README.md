@@ -49,4 +49,4 @@ Simply check the boxes of Cheats you want to use in the Cheat Engine Window.
 
 ### Disclaimer
 
-I am not responsible for any misuse of this, in any shape or form. This was purely made for educational reasons and to learn game hacking. PLEASE, do not use it online.
+I am not responsible for any misuse of this, in any shape or form. This was purely made for educational reasons and to learn game hacking. and PLEASE, do not use this online.
