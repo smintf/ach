@@ -13,10 +13,10 @@
   <a href="https://https://github.com/smintf/ach/">
     <img src="https://img.shields.io/badge/platform-windows-blue">
   </a>
-  <a href="https://https://github.com/smintf/ach/">
+  <a href="https://cheatengine.org/">
       <img src="https://img.shields.io/badge/Cheat%20Engine-7.4-sucess">
   </a>
-  <a href="https://https://github.com/smintf/ach/">
+  <a href="https://github.com/assaultcube/AC/releases/tag/v1.2.0.2">
       <img src="https://img.shields.io/badge/AC%20Version-1.2.0.2-blueviolet">
   </a>
 </p>
