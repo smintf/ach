@@ -35,6 +35,7 @@ A Basic Cheat for AssaultCube, made to learn the Basics of Cheat Engine &amp; Ga
 - [ ] Aimbot
 - [ ] Triggerbot
 - [ ] ESP
+- [ ] Teleport
 
 ### Usage
 1 - Right click the .ct file to open it in Cheat Engine
