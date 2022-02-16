@@ -46,7 +46,7 @@ A Basic Cheat for AssaultCube, made to learn the Basics of Cheat Engine &amp; Ga
 
 ### How to use
 
-Simply check the boxes of Cheats you want to use in the Cheat Engine Window. 
+Simply check the boxes of the Cheats you want to use in the Cheat Engine Window. 
 
 ### Disclaimer
 
