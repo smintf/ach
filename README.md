@@ -26,9 +26,10 @@ A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp
 
 ### Features
 
+- [x] Unlimited Health
+- [x] Unlimited Vest
 - [x] Unlimited Ammo
 - [x] Unlimited Grenades
-- [x] Unlimited Health
 - [x] No Recoil
 - [x] Rapid Bullets
 - [x] One Shot Kill
