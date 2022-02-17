@@ -32,7 +32,6 @@ A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp
 - [x] No Recoil
 - [x] Rapid Bullets
 - [x] One Shot Kill
-- [x] Visual Features
 - [ ] Aimbot
 - [ ] Triggerbot
 - [ ] ESP
