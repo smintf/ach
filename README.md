@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://https://github.com/smintf/ach/">
+  <a href="https://github.com/smintf/ach/">
   <br>
   ach
   <br>
@@ -10,7 +10,7 @@
 <h4 align="center">Another External Cheat for AssaultCube</h4>
 
 <p align="center">
-  <a href="https://https://github.com/smintf/ach/">
+  <a href="https://www.microsoft.com/en-in/windows">
     <img src="https://img.shields.io/badge/platform-windows-blue">
   </a>
   <a href="https://cheatengine.org/">
