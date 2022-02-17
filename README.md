@@ -42,7 +42,7 @@ A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp
 Freeze simply means the Cheat freezes the value (writing it to memory every ~200ms) and it only affects you.
 <br>localPlayer on the other hand means the Cheat affects all localPlayers (CPU Controlled Bots and You) which may not be desirable.
 
-As a general rule of thumb it's better to use Cheats that have (Freeze) at the end, over ones that have (localPlayer) at the end.
+As a general rule of thumb it's better to use (Freeze) Cheats over (localPlayer) Cheats at the end.
 
 ### Usage
 1. Right click the .ct file to open it in Cheat Engine
