@@ -42,7 +42,7 @@ A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp
 2. Select the AssaultCube Process
 3. Hack Away!
 
-### How to use
+### How to use the Cheats?
 
 Simply check the boxes of the Cheats you want to use in the Cheat Engine Window. 
 
