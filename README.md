@@ -36,6 +36,7 @@ A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp
 - [x] Timer
 - [x] Radarhack
 - [x] Fullbright
+- [x] Always Headshot (Sniper Only)
 - [x] Airjump
 - [ ] Aimbot
 - [ ] Triggerbot
