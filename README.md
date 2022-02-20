@@ -32,7 +32,7 @@ A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp
 - [x] Unlimited Grenades
 - [x] No Recoil
 - [x] Rapid Bullets
-- [x] Instakill
+- [x] One Shot Kill
 - [x] Timer
 - [x] Radarhack
 - [x] Airjump
