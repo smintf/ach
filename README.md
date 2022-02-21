@@ -37,30 +37,24 @@ A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp
 - [ ] Triggerbot
 - [x] No Recoil
 - [x] Rapid Bullets
-- [x] One Shot Kill
 - [x] Always Headshot (Sniper Only)
-  
+- [x] One Shot Kill
+
 #### Visual Cheats
 - [ ] ESP
 - [ ] Wallhack / Chams
 - [x] Fullbright
 - [x] Disable Scope
-- [ ] Disable Gun Animation
+- [x] Disable Gun Animation
 
 #### Misc. Cheats
-- [x] Radarhack
-- [x] Timer
-- [x] Airjump
 - [ ] BunnyHop
 - [ ] Speed
 - [ ] Fly
+- [x] Airjump
+- [x] Radarhack
+- [x] Timer
   
-### Difference between (Freeze) & (localPlayer)
-Freeze simply means the Cheat freezes the value (writing it to memory every ~200ms) and it only affects you.
-<br>localPlayer on the other hand means the Cheat affects all localPlayers (CPU Controlled Bots and You) which may not be desirable.
-
-As a general rule of thumb it's better to use (Freeze) Cheats over (localPlayer) Cheatx.
-
 ### Usage
 1. Right click the .ct file to open it in Cheat Engine
 2. Select the AssaultCube Process
