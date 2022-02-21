@@ -35,15 +35,17 @@ A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp
 #### Combat Cheats
 - [ ] Aimbot
 - [ ] Triggerbot
-- [ ] ESP
 - [x] No Recoil
 - [x] Rapid Bullets
 - [x] One Shot Kill
 - [x] Always Headshot (Sniper Only)
   
 #### Visual Cheats
+- [ ] ESP
+- [ ] Wallhack / Chams
 - [x] Fullbright
 - [x] Disable Scope
+- [ ] Disable Gun Animation
 
 #### Misc. Cheats
 - [x] Radarhack
