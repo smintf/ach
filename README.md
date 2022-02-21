@@ -25,24 +25,34 @@
 A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp; Game Hacking.
 
 ### Features
+#### Unlim. Cheats
 - [x] Unlimited Health
 - [x] Unlimited Vest
 - [x] Unlimited Ammo
 - [x] Unlimited Magazine
 - [x] Unlimited Grenades
-- [x] No Recoil
-- [x] Rapid Bullets
-- [x] One Shot Kill
-- [x] Timer
-- [x] Radarhack
-- [x] Fullbright
-- [x] Always Headshot (Sniper Only)
-- [x] Airjump
+
+#### Combat Cheats
 - [ ] Aimbot
 - [ ] Triggerbot
 - [ ] ESP
-- [ ] Teleport
+- [x] No Recoil
+- [x] Rapid Bullets
+- [x] One Shot Kill
+- [x] Always Headshot (Sniper Only)
+  
+#### Visual Cheats
+- [x] Fullbright
+- [x] Disable Scope
 
+#### Misc. Cheats
+- [x] Radarhack
+- [x] Timer
+- [x] Airjump
+- [ ] BunnyHop
+- [ ] Speed
+- [ ] Fly
+  
 ### Difference between (Freeze) & (localPlayer)
 Freeze simply means the Cheat freezes the value (writing it to memory every ~200ms) and it only affects you.
 <br>localPlayer on the other hand means the Cheat affects all localPlayers (CPU Controlled Bots and You) which may not be desirable.
