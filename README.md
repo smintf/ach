@@ -25,7 +25,7 @@
 A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp; Game Hacking.
 
 ### Features
-#### Unlim. Cheats
+#### "Unlimited" Cheats
 - [x] Unlimited Health
 - [x] Unlimited Vest
 - [x] Unlimited Ammo
