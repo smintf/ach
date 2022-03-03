@@ -33,26 +33,34 @@ A Basic Cheat for AssaultCube, made for learning the Basics of Cheat Engine &amp
 - [x] Unlimited Grenades
 
 #### Combat Cheats
-- [ ] Aimbot
-- [ ] Triggerbot
+- [x] Aimbot (W.I.P)
+- [x] Triggerbot
 - [x] No Recoil
 - [x] Rapid Bullets
 - [x] Always Headshot (Sniper Only)
 - [x] One Shot Kill
 
 #### Visual Cheats
-- [ ] ESP
+- [x] ESP (W.I.P)
 - [ ] Wallhack / Chams
 - [x] Fullbright
+- [ ] Custom Crosshair
+- [x] Polygon Mode
 - [x] Disable Scope
 - [x] Disable Gun Animation
 
 #### Misc. Cheats
-- [ ] BunnyHop
-- [ ] Speed
-- [ ] Fly
-- [x] Airjump
+- [x] BunnyHop (Basic)
+- [x] Speedhack (Basic)
+- [x] Flyhack
 - [x] Radarhack
+- [ ] Teleport
+- [x] NoClip
+- [x] Airjump
+- [ ] Item Magnet
+- [ ] Pingspoofer
+- [ ] Chat Spammer
+- [x] Edit Mode (Serverside)
 - [x] Timer
   
 ### Usage
