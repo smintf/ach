@@ -7,9 +7,12 @@
 </h1>
 
 
-<h4 align="center">Another External Cheat for AssaultCube</h4>
+<h4 align="center">another external cheat for assaultcube</h4>
 
 <p align="center">
+  <a href="https://github.com/smintf/autolingo/blob/main/LICENSE/">
+    <img src="https://img.shields.io/badge/license-AGPL%20v3-black">
+  </a>
   <a href="https://www.microsoft.com/en-in/windows">
     <img src="https://img.shields.io/badge/platform-windows-blue">
   </a>
