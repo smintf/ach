@@ -1,0 +1,2566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <Forms>
+    <formMsg Class="TCEForm" Encoding="Ascii85">ty0Zz):Zfw*70)/V=vr3yPzC.uDTsK)]GHLmQvJ2n;Zmaaa%LTuADb$cjmx/!GRMJe/aRV*4}-ga[kr9[x0ZIIzqvRai0Y4XsmQhmS(kHE8AmBsQ._t3FE6ZSWpkt#?aRRcm)VE,uF$;1pbA(N]h8]wA_6}5kSdH.=fOpCGnZhWaP_PlF$]%KsoN3!ZTNJCZPoF/i]?U.VPlD-R+W!du*)/+[n[},@spVw(!{cOeZNix$5/MZ,d.yF}VIH-;ae8cB/]VX25z};OZ$9TmsG,GB4xYixst{z}bWCX*8TUWyH1=I!X6Q(j-!rDyiXyA()fg2TzXz6OU;tKU3T@*tHI3GT;Z3QH,P=L#QyGQLR.s=S*Ecx@5M24?CZ3q*?_$onYj7m_SbMxmI7L#{jA/@nPw:v{M?:,d^#LP%9]iuENf^@b3[PFOHnu=0aFSy(!XG.tn6k%c94h[BdI,Vy,;S(ci6.K:M{,:h/IzlA@sC=W/xqzM-Ozj@m*#T.8x/YVMFWgDmP5Ey?jdg2}i)%:2#Wv6*tmsG2=#K2Qx-r*9PtlPhBty)llHbF(_tp]hWz)Wg9fyiA5lME{@l$@-qe5A-}9c2PL^e)0;yUC)u6f3(zAEh?=Odm10.#s5Js]U3</formMsg>
+    <UDF1 Class="TCEForm" Encoding="Ascii85">jgikz!Y}{iO9vJPoa6yGaPYLiNW4SY#JC8[rYN@DDr:bQ)pAI3C)%doWqcI7KMYWe-1/w{?8_RV@$P.vOwBHGuwgR)T*rEby_P7}gz^NB8xy,nh4Ky+hehzMGNVi3D/7aa?C1D(n1zC}096fpYF+zNHo_TsC:1Whm/A3g2{Kc7(+p7N1,#$ha.MV*swtDSbVkSvW/C]{wXk)hc$}x]UF(L;S^Kx%CiaQ99/mLR*bRk^q[)h=%fj;2wUxO-qfkmD,hf.TqcnglYt;1JeK%YY*Xbx?v0?8X5LELP]OT^1E,%_QxLj7MaK,h6Bo+qrWABH=Jk]+1jm@O;pt-+aD0ca!gNDUkvuyRSBKTFYmQ:K8NaCX7_6R5*RX!e09t@ubI+Pl/aq_M#NO1BciQE0rDa6trMEy8%]-hKv#5l?^]bos3B:]m</UDF1>
+  </Forms>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>42</ID>
+      <Description>"Cheats"</Description>
+      <Options moManualExpandCollapse="1" moDeactivateChildrenAsWell="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>118</ID>
+          <Description>"Unlimited Health"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,ac_client.exe,29 7B 04 8B C7) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  sub [ebx+04],edi
+  mov eax,edi
+  //====
+  cmp [ebx+F0],0
+  jne return
+  mov [ebx+04],#100
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 29 7B 04 8B C7
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+29D1F
+
+ac_client.exe+29CFD: 2B F0                    - sub esi,eax
+ac_client.exe+29CFF: 0F BF 84 24 1E 01 00 00  - movsx eax,word ptr [esp+0000011E]
+ac_client.exe+29D07: 89 44 24 0C              - mov [esp+0C],eax
+ac_client.exe+29D0B: 89 73 08                 - mov [ebx+08],esi
+ac_client.exe+29D0E: DB 44 24 0C              - fild dword ptr [esp+0C]
+ac_client.exe+29D12: DE CA                    - fmulp st(2),st(0)
+ac_client.exe+29D14: DC C9                    - fmul st(1),st(0)
+ac_client.exe+29D16: DE E1                    - fsubrp st(1),st(0)
+ac_client.exe+29D18: E8 43 05 09 00           - call ac_client.exe+BA260
+ac_client.exe+29D1D: 2B F8                    - sub edi,eax
+// ---------- INJECTING HERE ----------
+ac_client.exe+29D1F: 29 7B 04                 - sub [ebx+04],edi
+// ---------- DONE INJECTING  ----------
+ac_client.exe+29D22: 8B C7                    - mov eax,edi
+ac_client.exe+29D24: 5F                       - pop edi
+ac_client.exe+29D25: 5E                       - pop esi
+ac_client.exe+29D26: 8B E5                    - mov esp,ebp
+ac_client.exe+29D28: 5D                       - pop ebp
+ac_client.exe+29D29: C2 04 00                 - ret 0004
+ac_client.exe+29D2C: 9E                       - sahf 
+ac_client.exe+29D2D: 9C                       - pushfd 
+ac_client.exe+29D2E: 42                       - inc edx
+ac_client.exe+29D2F: 00 B1 9C 42 00 C5        - add [ecx-3AFFBD64],dh
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>120</ID>
+          <Description>"Unlimited Ammo"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,ac_client.exe,FF 0E 57 8B 7C 24 14 8D 74 24 28 E8 87) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  dec [esi]
+  push edi
+  mov edi,[esp+14]
+  jmp return
+
+INJECT:
+  jmp code
+  nop 2
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db FF 0E 57 8B 7C 24 14
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+637E9
+
+ac_client.exe+637CD: 50                    - push eax
+ac_client.exe+637CE: 8D 4C 24 20           - lea ecx,[esp+20]
+ac_client.exe+637D2: 51                    - push ecx
+ac_client.exe+637D3: 8B CE                 - mov ecx,esi
+ac_client.exe+637D5: FF D2                 - call edx
+ac_client.exe+637D7: 8B 46 0C              - mov eax,[esi+0C]
+ac_client.exe+637DA: 0F BF 88 0A 01 00 00  - movsx ecx,word ptr [eax+0000010A]
+ac_client.exe+637E1: 8B 56 18              - mov edx,[esi+18]
+ac_client.exe+637E4: 89 0A                 - mov [edx],ecx
+ac_client.exe+637E6: 8B 76 14              - mov esi,[esi+14]
+// ---------- INJECTING HERE ----------
+ac_client.exe+637E9: FF 0E                 - dec [esi]
+// ---------- DONE INJECTING  ----------
+ac_client.exe+637EB: 57                    - push edi
+ac_client.exe+637EC: 8B 7C 24 14           - mov edi,[esp+14]
+ac_client.exe+637F0: 8D 74 24 28           - lea esi,[esp+28]
+ac_client.exe+637F4: E8 87 E3 FF FF        - call ac_client.exe+61B80
+ac_client.exe+637F9: 5F                    - pop edi
+ac_client.exe+637FA: 5E                    - pop esi
+ac_client.exe+637FB: B0 01                 - mov al,01
+ac_client.exe+637FD: 5B                    - pop ebx
+ac_client.exe+637FE: 8B E5                 - mov esp,ebp
+ac_client.exe+63800: 5D                    - pop ebp
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>122</ID>
+          <Description>"Unlimited Magazine"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,ac_client.exe,29 08 8B 46 08) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  sub [eax],ecx
+  mov eax,[esi+08]
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 29 08 8B 46 08
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+61E44
+
+ac_client.exe+61E28: 8B 10                 - mov edx,[eax]
+ac_client.exe+61E2A: 0F BF 89 18 01 00 00  - movsx ecx,word ptr [ecx+00000118]
+ac_client.exe+61E31: 8B 46 14              - mov eax,[esi+14]
+ac_client.exe+61E34: 2B 08                 - sub ecx,[eax]
+ac_client.exe+61E36: 83 C4 04              - add esp,04
+ac_client.exe+61E39: 3B CA                 - cmp ecx,edx
+ac_client.exe+61E3B: 7C 02                 - jl ac_client.exe+61E3F
+ac_client.exe+61E3D: 8B CA                 - mov ecx,edx
+ac_client.exe+61E3F: 01 08                 - add [eax],ecx
+ac_client.exe+61E41: 8B 46 10              - mov eax,[esi+10]
+// ---------- INJECTING HERE ----------
+ac_client.exe+61E44: 29 08                 - sub [eax],ecx
+// ---------- DONE INJECTING  ----------
+ac_client.exe+61E46: 8B 46 08              - mov eax,[esi+08]
+ac_client.exe+61E49: 39 05 F4 F4 50 00     - cmp [ac_client.exe+10F4F4],eax
+ac_client.exe+61E4F: 0F 94 C3              - sete bl
+ac_client.exe+61E52: 85 C0                 - test eax,eax
+ac_client.exe+61E54: 74 3F                 - je ac_client.exe+61E95
+ac_client.exe+61E56: D9 EE                 - fldz 
+ac_client.exe+61E58: 33 D2                 - xor edx,edx
+ac_client.exe+61E5A: 84 DB                 - test bl,bl
+ac_client.exe+61E5C: 57                    - push edi
+ac_client.exe+61E5D: 0F 95 C2              - setne dl
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>121</ID>
+          <Description>"Unlimited Grenades"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+ 
+aobscanmodule(INJECT,ac_client.exe,FF 08 8B 46 0C) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  dec [eax]
+  mov eax,[esi+0C]
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db FF 08 8B 46 0C
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+63378
+
+ac_client.exe+63355: 8D 4C 24 08           - lea ecx,[esp+08]
+ac_client.exe+63359: 51                    - push ecx
+ac_client.exe+6335A: 89 46 28              - mov [esi+28],eax
+ac_client.exe+6335D: 89 44 24 0C           - mov [esp+0C],eax
+ac_client.exe+63361: E8 6A 14 00 00        - call ac_client.exe+647D0
+ac_client.exe+63366: 8B 56 08              - mov edx,[esi+08]
+ac_client.exe+63369: 8B 1D AC 9E 50 00     - mov ebx,[ac_client.exe+109EAC]
+ac_client.exe+6336F: 52                    - push edx
+ac_client.exe+63370: E8 2B C2 FF FF        - call ac_client.exe+5F5A0
+ac_client.exe+63375: 8B 46 14              - mov eax,[esi+14]
+// ---------- INJECTING HERE ----------
+ac_client.exe+63378: FF 08                 - dec [eax]
+// ---------- DONE INJECTING  ----------
+ac_client.exe+6337A: 8B 46 0C              - mov eax,[esi+0C]
+ac_client.exe+6337D: 0F BF 88 0A 01 00 00  - movsx ecx,word ptr [eax+0000010A]
+ac_client.exe+63384: 8B 56 18              - mov edx,[esi+18]
+ac_client.exe+63387: 89 0A                 - mov [edx],ecx
+ac_client.exe+63389: 8B 46 08              - mov eax,[esi+08]
+ac_client.exe+6338C: 89 B0 84 03 00 00     - mov [eax+00000384],esi
+ac_client.exe+63392: 8B 44 24 14           - mov eax,[esp+14]
+ac_client.exe+63396: C7 46 34 01 00 00 00  - mov [esi+34],00000001
+ac_client.exe+6339D: 8B 76 28              - mov esi,[esi+28]
+ac_client.exe+633A0: 83 C4 04              - add esp,04
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>145</ID>
+          <Description>"Combat"</Description>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>160</ID>
+              <Description>"Aimbot"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+
+function SubTractAngles(angle1, angle2)
+    local sub = (angle2 - angle1) % 360
+    if sub &gt; 180 then
+        sub = sub - 360
+    elseif sub &lt; -180 then
+        sub = sub + 360
+    end
+    return sub
+end
+
+-- Offsets
+local FLAG_TEAM = 0x32C
+local HEALTH = 0xF8
+local NEXT_PLAYER = 0x4 -- The offset of the structure from one player to another
+local COORDINATE_X = 0x34
+local COORDINATE_Y = 0x38
+local COORDINATE_Z = 0x3C
+local ANGLE_X = 0x40
+local ANGLE_Y = 0x44
+
+local BASE_PLAYERS = getAddress('[ac_client.exe+0010F4F8]')
+local BASE_MY_PLAYER = getAddress('[ac_client.exe+0010F4F4]')
+
+-- Declaration of other variables
+local player -- Structure with all my data
+local enemy -- Structure with the enemy players, the targets.
+local amount_players -- Number of players
+local my_team -- Contains the necessary information to know who is on my team.
+
+
+local MAX_ATTEMPTS = 1000 -- Help the "UpdatePlayersData" function not to enter an infinite loop.
+-- To understand why this is necessary, you need to study how the player structures work in the Assalt Cube game.
+
+
+-- Function that updates my player information
+local function UpdateMyData()
+    player = {x = readFloat(BASE_MY_PLAYER + COORDINATE_X),
+              y = readFloat(BASE_MY_PLAYER + COORDINATE_Y),
+              z = readFloat(BASE_MY_PLAYER + COORDINATE_Z),
+              viewMatrix = {x = BASE_MY_PLAYER + ANGLE_X,
+                            y = BASE_MY_PLAYER + ANGLE_Y
+              }
+    }
+    my_team = readInteger(BASE_MY_PLAYER + FLAG_TEAM)
+end
+
+
+--Function that updates information about players
+--And it's different from my team.
+local function UpdatePlayersData()
+    amount_players = readInteger("ac_client.exe+10A22C")-1
+    enemy = {}
+
+    local OFFSET = NEXT_PLAYER -- This variable contains the offset value of the current player being processed
+    local current_player = 0 -- Contains the player base in process
+    local counter = 0
+    local countPlayer = 0
+    while(countPlayer &lt;= amount_players) do
+        counter = counter + 1
+        if counter &gt; MAX_ATTEMPTS then print(#enemy) return end
+
+        current_player = readInteger(BASE_PLAYERS + OFFSET)
+        if readInteger(current_player + HEALTH) then
+            countPlayer = countPlayer + 1
+            if readInteger(current_player + HEALTH) &gt;= 1 and readInteger(current_player + HEALTH) &lt;= 1000 then -- The player exists and is alive.
+                if readInteger(current_player + FLAG_TEAM) ~= my_team then -- If the player is my enemy
+                    enemy[#enemy+1] = {}
+                    enemy[#enemy].x = readFloat(current_player + COORDINATE_X)
+                    enemy[#enemy].y = readFloat(current_player + COORDINATE_Y)
+                    enemy[#enemy].z = readFloat(current_player + COORDINATE_Z)
+                end
+            end
+        end
+        OFFSET = OFFSET + NEXT_PLAYER
+    end
+end
+
+function Aimbot()
+
+    if #enemy == 0 then return end -- Returns if no address could be obtained.
+
+    local differenceX = {}
+    local differenceY = {}
+    local differenceZ = {}
+    local lenght = {}
+    local lenghtXY = {}
+    local targetX = {}
+    local targetY = {}
+
+    for	i=1, #enemy do
+        differenceX[i] = enemy[i].x - player.x
+        differenceY[i] = enemy[i].y - player.y
+		differenceZ[i] = enemy[i].z - player.z
+        lenght[i] =   math.sqrt(differenceX[i] ^ 2 + differenceY[i] ^ 2 + differenceZ[i] ^ 2)
+		lenghtXY[i] = math.sqrt(differenceX[i] ^ 2 + differenceY[i] ^ 2)
+        targetX[i] = 90+math.deg(math.atan2(differenceY[i], differenceX[i]))
+        targetY[i] = math.deg(math.atan2(differenceZ[i], lenghtXY[i]))
+
+        if targetX[i] &lt; 0 then
+           targetX[i] = 360 + targetX[i]
+        end
+    end
+
+    local playerX = readFloat(player.viewMatrix.x)
+    local playerY = readFloat(player.viewMatrix.y)
+
+    local temp = math.sqrt(SubTractAngles(playerX, targetX[1]) ^ 2 + SubTractAngles(playerY, targetY[1]) ^ 2)
+    local idx_bot = 1
+    for i=2, #targetX do
+        if math.sqrt(SubTractAngles(playerX, targetX[i]) ^ 2 + SubTractAngles(playerY, targetY[i]) ^ 2) &lt; temp then
+        	idx_bot = i
+            temp = math.sqrt(SubTractAngles(playerX, targetX[i]) ^ 2 + SubTractAngles(playerY, targetY[i]) ^ 2)
+        end
+    end
+
+    writeFloat(player.viewMatrix.x, targetX[idx_bot])
+    writeFloat(player.viewMatrix.y, targetY[idx_bot])
+end
+
+function checkKeyAimbot()
+    if isKeyPressed( VK_Q ) then
+        if not readInteger('[ac_client.exe+0010F4F8]') then return end--The function returns if the address does not exist.
+        UpdateMyData()
+        UpdatePlayersData()
+        Aimbot()
+    end
+end
+
+showMessage("Press 'Q' to activate aimbot")
+
+if t1 then t1.destroy(); t1=nil end
+t1 = createTimer()
+t1.Interval = 1
+t1.onTimer = checkKeyAimbot
+{$asm}
+[DISABLE]
+{$lua}
+if t1 then t1.destroy(); t1=nil end
+{$asm}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>159</ID>
+              <Description>"Triggerbot"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+
+function triggerbot()
+    return executeCodeEx(0, nil, "4607C0") ~= 0
+end
+
+if mt then mt.terminate(); mt.waitfor(); mt = nil end
+mt = createThread (function (thread)
+    while not thread.terminated do
+        if triggerbot() then
+            mouse_event(MOUSEEVENTF_LEFTDOWN)
+
+            sleep(1)
+            mouse_event(MOUSEEVENTF_LEFTUP)
+        else
+            sleep(1)
+        end
+    end
+end)
+
+{$asm}
+[DISABLE]
+{$lua}
+if mt then mt.terminate(); mt.waitfor(); mt = nil end
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>46</ID>
+              <Description>"No Recoil"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{$lua}
+[ENABLE]
+writeBytes(0x4EE444,0x00,0x00,0x00,0x00)
+writeBytes(0x4EE3F8,0x00,0x00,0x00,0x00)
+[DISABLE]
+writeBytes(0x4EE444,0x6F,0x12,0x83,0x3A)
+writeBytes(0x4EE3F8,0xDA,0xD7,0x23,0xBC)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>141</ID>
+              <Description>"Rapid Bullets"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-21
+  Author : A
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+ 
+aobscanmodule(INJECT,ac_client.exe,2B 02 78 37 33 DB) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  sub eax,[edx]
+  js ac_client.exe+63661
+  xor ebx,ebx
+  jmp return
+
+INJECT:
+  jmp code
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 2B 02 78 37 33 DB
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+63626
+
+ac_client.exe+63609: 53                 - push ebx
+ac_client.exe+6360A: 56                 - push esi
+ac_client.exe+6360B: 8B F1              - mov esi,ecx
+ac_client.exe+6360D: 8B 0D AC 9E 50 00  - mov ecx,[ac_client.exe+109EAC]
+ac_client.exe+63613: 8B 56 18           - mov edx,[esi+18]
+ac_client.exe+63616: 57                 - push edi
+ac_client.exe+63617: 8B 7E 08           - mov edi,[esi+08]
+ac_client.exe+6361A: 8B C1              - mov eax,ecx
+ac_client.exe+6361C: 2B 87 10 02 00 00  - sub eax,[edi+00000210]
+ac_client.exe+63622: 89 74 24 10        - mov [esp+10],esi
+// ---------- INJECTING HERE ----------
+ac_client.exe+63626: 2B 02              - sub eax,[edx]
+// ---------- DONE INJECTING  ----------
+ac_client.exe+63628: 78 37              - js ac_client.exe+63661
+ac_client.exe+6362A: 33 DB              - xor ebx,ebx
+ac_client.exe+6362C: 89 5E 20           - mov [esi+20],ebx
+ac_client.exe+6362F: 89 1A              - mov [edx],ebx
+ac_client.exe+63631: 8B 56 08           - mov edx,[esi+08]
+ac_client.exe+63634: 38 9A 24 02 00 00  - cmp [edx+00000224],bl
+ac_client.exe+6363A: 75 30              - jne ac_client.exe+6366C
+ac_client.exe+6363C: 89 5E 1C           - mov [esi+1C],ebx
+ac_client.exe+6363F: 39 1D D0 01 51 00  - cmp [ac_client.exe+1101D0],ebx
+ac_client.exe+63645: 74 1A              - je ac_client.exe+63661
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>116</ID>
+              <Description>"One Shot Kill (with Unlim Health)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,ac_client.exe,29 7B 04 8B C7) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  cmp [ebx+F0],0
+  je return
+  mov [ebx+04],#0
+  mov eax,edi
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 29 7B 04 8B C7
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+29D1F
+
+ac_client.exe+29CFD: 2B F0                    - sub esi,eax
+ac_client.exe+29CFF: 0F BF 84 24 1E 01 00 00  - movsx eax,word ptr [esp+0000011E]
+ac_client.exe+29D07: 89 44 24 0C              - mov [esp+0C],eax
+ac_client.exe+29D0B: 89 73 08                 - mov [ebx+08],esi
+ac_client.exe+29D0E: DB 44 24 0C              - fild dword ptr [esp+0C]
+ac_client.exe+29D12: DE CA                    - fmulp st(2),st(0)
+ac_client.exe+29D14: DC C9                    - fmul st(1),st(0)
+ac_client.exe+29D16: DE E1                    - fsubrp st(1),st(0)
+ac_client.exe+29D18: E8 43 05 09 00           - call ac_client.exe+BA260
+ac_client.exe+29D1D: 2B F8                    - sub edi,eax
+// ---------- INJECTING HERE ----------
+ac_client.exe+29D1F: 29 7B 04                 - sub [ebx+04],edi
+// ---------- DONE INJECTING  ----------
+ac_client.exe+29D22: 8B C7                    - mov eax,edi
+ac_client.exe+29D24: 5F                       - pop edi
+ac_client.exe+29D25: 5E                       - pop esi
+ac_client.exe+29D26: 8B E5                    - mov esp,ebp
+ac_client.exe+29D28: 5D                       - pop ebp
+ac_client.exe+29D29: C2 04 00                 - ret 0004
+ac_client.exe+29D2C: 9E                       - sahf 
+ac_client.exe+29D2D: 9C                       - pushfd 
+ac_client.exe+29D2E: 42                       - inc edx
+ac_client.exe+29D2F: 00 B1 9C 42 00 C5        - add [ecx-3AFFBD64],dh
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>128</ID>
+              <Description>"Automatic Guns"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-20
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,ac_client.exe,75 09 8B 46 08) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  jmp ac_client.exe+63721
+  mov eax,[esi+08]
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 75 09 8B 46 08
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+63716
+
+ac_client.exe+636EB: 3B 05 F4 F4 50 00     - cmp eax,[ac_client.exe+10F4F4]
+ac_client.exe+636F1: 0F 85 6A FF FF FF     - jne ac_client.exe+63661
+ac_client.exe+636F7: 8B 4E 14              - mov ecx,[esi+14]
+ac_client.exe+636FA: 39 19                 - cmp [ecx],ebx
+ac_client.exe+636FC: E9 53 FF FF FF        - jmp ac_client.exe+63654
+ac_client.exe+63701: 8B 4E 08              - mov ecx,[esi+08]
+ac_client.exe+63704: 89 B1 84 03 00 00     - mov [ecx+00000384],esi
+ac_client.exe+6370A: 8B 56 0C              - mov edx,[esi+0C]
+ac_client.exe+6370D: FF 46 1C              - inc [esi+1C]
+ac_client.exe+63710: 38 9A 28 01 00 00     - cmp [edx+00000128],bl
+// ---------- INJECTING HERE ----------
+ac_client.exe+63716: 75 09                 - jne ac_client.exe+63721
+// ---------- DONE INJECTING  ----------
+ac_client.exe+63718: 8B 46 08              - mov eax,[esi+08]
+ac_client.exe+6371B: 88 98 24 02 00 00     - mov [eax+00000224],bl
+ac_client.exe+63721: 8B 4E 04              - mov ecx,[esi+04]
+ac_client.exe+63724: 8B 04 8D 38 A2 50 00  - mov eax,[ecx*4+ac_client.exe+10A238]
+ac_client.exe+6372B: 3B C3                 - cmp eax,ebx
+ac_client.exe+6372D: 7E 0E                 - jle ac_client.exe+6373D
+ac_client.exe+6372F: 39 46 1C              - cmp [esi+1C],eax
+ac_client.exe+63732: 7C 09                 - jl ac_client.exe+6373D
+ac_client.exe+63734: 8B 56 08              - mov edx,[esi+08]
+ac_client.exe+63737: 88 9A 24 02 00 00     - mov [edx+00000224],bl
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>129</ID>
+              <Description>"Always Headshot (Sniper Only)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-20
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+aobscanmodule(INJECT,ac_client.exe,75 09 8D 1C 5B) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//jne ac_client.exe+61772
+lea ebx,[ebx+ebx*2]
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 75 09 8D 1C 5B
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+61767
+
+ac_client.exe+61748: 8B 6A 04           - mov ebp,[edx+04]
+ac_client.exe+6174B: 32 C9              - xor cl,cl
+ac_client.exe+6174D: 88 4C 24 18        - mov [esp+18],cl
+ac_client.exe+61751: 85 ED              - test ebp,ebp
+ac_client.exe+61753: 74 17              - je ac_client.exe+6176C
+ac_client.exe+61755: 83 FD 05           - cmp ebp,05
+ac_client.exe+61758: 75 18              - jne ac_client.exe+61772
+ac_client.exe+6175A: 3B 35 F4 F4 50 00  - cmp esi,[ac_client.exe+10F4F4]
+ac_client.exe+61760: 75 10              - jne ac_client.exe+61772
+ac_client.exe+61762: 83 7C 24 1C 02     - cmp dword ptr [esp+1C],02
+// ---------- INJECTING HERE ----------
+ac_client.exe+61767: 75 09              - jne ac_client.exe+61772
+// ---------- DONE INJECTING  ----------
+ac_client.exe+61769: 8D 1C 5B           - lea ebx,[ebx+ebx*2]
+ac_client.exe+6176C: B1 01              - mov cl,01
+ac_client.exe+6176E: 88 4C 24 18        - mov [esp+18],cl
+ac_client.exe+61772: 33 C0              - xor eax,eax
+ac_client.exe+61774: 84 C9              - test cl,cl
+ac_client.exe+61776: 8B 4C 24 18        - mov ecx,[esp+18]
+ac_client.exe+6177A: 0F 95 C0           - setne al
+ac_client.exe+6177D: 50                 - push eax
+ac_client.exe+6177E: 51                 - push ecx
+ac_client.exe+6177F: 55                 - push ebp
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>146</ID>
+          <Description>"Visual"</Description>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>163</ID>
+              <Description>"ESP"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+local window_name = "AssaultCube"
+local screen_width, screen_height = 0, 0
+
+
+function Normalize(v)
+    local mag = math.sqrt(v[1]* v[1] + v[2]*v[2] + v[3]*v[3])
+
+    return {
+           v[1] / mag,
+           v[2] / mag,
+           v[3] / mag
+    }
+end
+
+function CrossProduct(v1, v2)
+    return {
+        v1[2]*v2[3] - v1[3]*v2[2],
+        v1[3]*v2[1] - v1[1]*v2[3],
+        v1[1]*v2[2] - v1[2]*v2[1]
+    }
+end
+
+function DotProduct(v1, v2)
+    return v1[1]*v2[1] + v1[2]*v2[2] + v1[3]*v2[3]
+end
+
+function Addition(v1, v2)
+    return {v1[1]+v2[1], v1[2]+v2[2], v1[3]+v2[3]}
+end
+
+function Subtract(v1, v2)
+    return {
+           v1[1]-v2[1],
+           v1[2]-v2[2],
+           v1[3]-v2[3]
+    }
+end
+
+function PreMultiplyVector(m, v)
+    return {
+        m[1][1] * v[1] + m[2][1] * v[2] + m[3][1] * v[3] + m[4][1] * v[4],
+        m[1][2] * v[1] + m[2][2] * v[2] + m[3][2] * v[3] + m[4][2] * v[4],
+        m[1][3] * v[1] + m[2][3] * v[2] + m[3][3] * v[3] + m[4][3] * v[4],
+        m[1][4] * v[1] + m[2][4] * v[2] + m[3][4] * v[3] + m[4][4] * v[4]
+    }
+end
+
+function PostMultiplyVector(v, m)
+    return {
+        v[1] * m[1][1] + v[2] * m[1][2] + v[3] * m[1][3] + v[4] * m[1][4],
+        v[1] * m[2][1] + v[2] * m[2][2] + v[3] * m[2][3] + v[4] * m[2][4],
+        v[1] * m[3][1] + v[2] * m[3][2] + v[3] * m[3][3] + v[4] * m[3][4],
+        v[1] * m[4][1] + v[2] * m[4][2] + v[3] * m[4][3] + v[4] * m[4][4]
+    }
+end
+
+function PreMultiplyMatrix(m1, m2)
+    return {
+        PreMultiplyVector(m2, m1[1]),
+        PreMultiplyVector(m2, m1[2]),
+        PreMultiplyVector(m2, m1[3]),
+        PreMultiplyVector(m2, m1[4])
+    }
+end
+
+function PostMultiplyMatrix(m1, m2)
+    return {
+        PostMultiplyVector(m1[1], m2),
+        PostMultiplyVector(m1[2], m2),
+        PostMultiplyVector(m1[3], m2),
+        PostMultiplyVector(m1[4], m2)
+    }
+end
+
+function MatrixRotationX(m, i)
+    local sin = math.sin
+    local cos = math.cos
+    local i = math.rad(i)
+
+    local r = {
+        {1, 0, 0, 0},
+        {0, cos(i), sin(i), 0},
+        {0, -sin(i), cos(i), 0},
+        {0, 0, 0, 1}
+    }
+
+    return PreMultiplyMatrix(m, r)
+end
+
+function MatrixRotationY(m, i)
+    local sin = math.sin
+    local cos = math.cos
+    local i = math.rad(i)
+
+    local r = {
+        {cos(i), 0, -sin(i), 0},
+        {0, 1, 0, 0},
+        {sin(i), 0, cos(i), 0},
+        {0, 0, 0, 1}
+    }
+
+    return PreMultiplyMatrix(m, r)
+end
+
+function MatrixRotationZ(m, i)
+    local sin = math.sin
+    local cos = math.cos
+    local i = math.rad(i)
+
+    local r = {
+        {cos(i), sin(i), 0, 0},
+        {-sin(i), cos(i), 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    }
+
+    return PreMultiplyMatrix(m, r)
+end
+
+function MatrixTranslation(m, x, y, z)
+    local t = {
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {x, y, z, 1}
+    }
+
+    return PreMultiplyMatrix(m, t)
+end
+
+function MatrixScaling(m, x, y, z)
+    local w = w or 1
+    local s = {
+        {x, 0, 0, 0},
+        {0, y, 0, 0},
+        {0, 0, z, 0},
+        {0, 0, 0, 1}
+    }
+
+    return PreMultiplyMatrix(m, s)
+end
+
+function MatrixLookAtRH(m, eye, at, up)
+    local zaxis = Normalize(Subtract(eye, at))
+    local xaxis = Normalize(CrossProduct(up, zaxis))
+    local yaxis = CrossProduct(zaxis, xaxis)
+
+    local viewMatrix = {
+        {xaxis[1], yaxis[1], zaxis[1], 0},
+        {xaxis[2], yaxis[2], zaxis[2], 0},
+        {xaxis[3], yaxis[3], zaxis[3], 0},
+        {DotProduct(xaxis, eye), DotProduct(yaxis, eye), DotProduct(zaxis, eye), 1}
+    }
+
+    return PreMultiplyMatrix(m, viewMatrix)
+end
+
+function MatrixFPSViewRH(m, eye, pitch, yaw, roll)
+    local ty = math.sin(math.rad(yaw))
+    local sxz = math.cos(math.rad(yaw))
+    local tx = math.sin(math.rad(pitch)) * sxz
+    local tz = math.cos(math.rad(pitch)) * sxz
+
+    local at = {eye[1]+tx, eye[2]+ty, eye[3]+tz}
+    local up = {0, 1, 0}
+
+    return MatrixLookAtRH(m, eye, at, up)
+end
+
+function MatrixPerspectiveFovRH(m, fov, aspect, zn, zf)
+    local tan = math.tan
+    local fov = math.rad(fov)
+    local yScale = 1/tan(fov/2)
+    local xScale = yScale / aspect
+
+     ---[[
+    local perspectiveMatrix = {
+        {xScale, 0, 0, 0},
+        {0, yScale, 0, 0},
+        {0, 0, zf/(zf-zn), -1},
+        {0, 0, zn*zf/(zf-zn), 0}
+    }
+    --]]--
+    --[[
+    local perspectiveMatrix = {
+          {xScale, 0, 0, 0},
+          {0, yScale, 0, 0},
+          {0, 0, (zf+zn)/(zn-zf), -1},
+          {0, 0, 2*zf*zn/(zn-zf), 0}
+    }
+    --]]--
+    return PreMultiplyMatrix(m, perspectiveMatrix)
+end
+
+function NewMatrix()
+    return {
+        {1, 0, 0 ,0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    }
+end
+
+function NewModel3D(vertices)
+    return {
+        m = NewMatrix(),
+        v = vertices
+    }
+end
+
+function ConvertToWC(vec)
+    return {screen_width * (vec[1] + 1)/2, screen_height * (vec[2] + 1)/2}
+end
+
+function ConvertToNDC(vec)
+    return {vec[1]/vec[4], vec[2]/vec[4], vec[3]/vec[4], vec[4]}
+end
+
+function PrintMatrix(m)
+    print("--------------------------------------------------------------")
+    for i=1, 4 do
+        local s = ""
+        for j=1, 4 do
+            if m[i][j] &lt; 0 then
+                s = s .. "  ||" ..  (m[i][j])
+            else
+                s = s .. "  ||  " ..  (m[i][j])
+            end
+        end
+        print(s)
+    end
+end
+
+function PrintVector(v)
+    print(table.unpack(v))
+end
+
+
+
+if form then form.destroy(); form=nil end
+form = createForm(false)
+form.DoubleBuffered = true
+form.Caption = "EspHack"
+form.FormStyle = "fsSystemStayOnTop"
+form.BorderStyle = "bsNone"
+form.Color = 0x000001
+form.setLayeredAttributes(0x000001, 0xFF, LWA_COLORKEY | LWA_ALPHA )
+form.Show()
+pic = createPicture()
+local img = createImage(form)
+
+local canvas = pic.Bitmap.Canvas
+
+-- Removes window interaction with user
+autoAssemble([[
+alloc(mem, 100)
+createthread(mem)
+label(win_name)
+
+mem:
+ push esi
+ push win_name
+ push 00
+ call USER32.FindWindowA
+ mov esi,eax
+ push -14
+ push esi
+ call USER32.GetWindowLongA
+ push 00080020
+ push -14
+ push esi
+ call USER32.SetWindowLongA
+ pop esi
+ ret
+
+win_name:
+ db 'EspHack',0
+]])
+
+autoAssemble([[
+alloc(code, 100)
+registersymbol(code)
+]])
+
+--Defines the position and size of the ESP hack window.
+local function UpdatePos()
+    local function UpdateForm()
+        if t_upd_frm then t_upd_frm.destroy(); t_upd_frm=nil end
+
+        local left = readInteger(getAddress("left"))
+        local top = readInteger(getAddress("top"))
+        local right = readInteger(getAddress("right"))
+        local bottom = readInteger(getAddress("bottom"))
+        local width = right - left - 6
+        local height = bottom - top - 28
+
+        screen_width = width
+        screen_height = height
+
+        if not form then return end
+        form.Top = top + 25
+        form.Left = left + 3
+        form.Width = width
+        form.Height = height
+
+        pic.Bitmap.Width = form.Width
+        pic.Bitmap.Height = form.Height
+
+        img.Width = form.Width
+        img.Height = form.Height
+    end
+
+    --Get information about the game window.
+    autoAssemble([[
+    createthread(code)
+    label(win_name)
+    label(target)
+    label(left)
+    label(top)
+    label(right)
+    label(bottom)
+    registersymbol(left)
+    registersymbol(top)
+    registersymbol(left)
+    registersymbol(right)
+    registersymbol(bottom)
+
+    code:
+     push win_name
+     push 00
+     call FindWindowA
+     push target
+     push eax
+     call GetWindowRect
+     xor eax,eax
+     ret
+
+    win_name:
+     db ']] .. window_name .. [[',0
+
+    target:
+     left:
+      dd 0
+     top:
+      dd 0
+     right:
+      dd 0
+     bottom:
+      dd 0]])
+
+      if t_upd_frm then t_upd_frm.destroy(); t_upd_frm=nil end
+      t_upd_frm = createTimer()
+      t_upd_frm.interval = 1000
+      t_upd_frm.OnTimer = UpdateForm
+end
+UpdatePos()
+
+local FLAG_TEAM = 0x32C
+local HEALTH = 0xF8
+local NEXT_PLAYER = 0x4
+local COORDINATE_X = 0x34
+local COORDINATE_Y = 0x38
+local COORDINATE_Z = 0x3C
+local ANGLE_X = 0x40
+local ANGLE_Y = 0x44
+
+local BASE_PLAYERS = getAddress('[ac_client.exe+0010F4F8]')
+local BASE_MY_PLAYER = getAddress('[ac_client.exe+0010F4F4]')
+
+local player -- Structure with all the data
+local enemy -- Structure with the enemy players, the targets.
+local amount_players -- Number of players
+local my_team -- Contains the necessary information to know who is on my team.
+
+
+local MAX_ATTEMPTS = 1000
+
+-- Function that updates my player information
+local function UpdateMyData()
+    player = {x = readFloat(BASE_MY_PLAYER + COORDINATE_X),
+              y = readFloat(BASE_MY_PLAYER + COORDINATE_Y),
+              z = readFloat(BASE_MY_PLAYER + COORDINATE_Z),
+              viewMatrix = {x = BASE_MY_PLAYER + ANGLE_X,
+                            y = BASE_MY_PLAYER + ANGLE_Y
+              }
+    }
+    my_team = readInteger(BASE_MY_PLAYER + FLAG_TEAM)
+end
+
+
+--Function that updates information about players
+--And it's different from my team.
+local function UpdatePlayersData()
+    amount_players = readInteger("ac_client.exe+10A22C")-1
+    if amount_players &lt; 0 then
+        amount_players = readInteger("ac_client.exe+10F500")-1
+    end
+    enemy = {}
+
+    local OFFSET = NEXT_PLAYER -- This variable contains the offset value of the current player being processed
+    local current_player = 0 -- Contains the player base in process
+    local counter = 0
+    local countPlayer = 0
+
+    while(countPlayer &lt;= amount_players) do
+        counter = counter + 1
+        if counter &gt; MAX_ATTEMPTS then print(#enemy) return end
+
+        current_player = readInteger(BASE_PLAYERS + OFFSET)
+
+        if readInteger(current_player + HEALTH) then
+            countPlayer = countPlayer + 1
+            if readInteger(current_player + HEALTH) &gt;= 1 and readInteger(current_player + HEALTH) &lt;= 1000 then -- The player exists and is alive.
+                if readInteger(current_player + FLAG_TEAM) ~= my_team then -- If the player is my enemy
+                    enemy[#enemy+1] = {}
+                    enemy[#enemy].x = readFloat(current_player + COORDINATE_X)
+                    enemy[#enemy].y = readFloat(current_player + COORDINATE_Y)
+                    enemy[#enemy].z = readFloat(current_player + COORDINATE_Z)
+
+                    enemy[#enemy].angX = readFloat(current_player + ANGLE_X)
+                    enemy[#enemy].angY = readFloat(current_player + ANGLE_Y)
+                end
+            end
+        end
+        OFFSET = OFFSET + NEXT_PLAYER
+    end
+end
+
+local function ESP(esplines, espboxes2d, espboxes3d)
+    local fov = readFloat("ac_client.exe+101BAC")
+
+    --Clean screen
+    canvas.Brush.Color = 0x000001
+    canvas.fillRect(0, 0, 2000, 2000)
+
+    if #enemy == 0 then return end -- Returns if no address could be obtained.
+
+    for	i=1, #enemy do
+        if espboxes3d then
+            local matrix = NewMatrix()
+            matrix = MatrixScaling(matrix, 2.5, 6, 2.5)
+            matrix = MatrixRotationY(matrix, -enemy[i].angX)
+            matrix = MatrixTranslation(matrix, enemy[i].x, enemy[i].z-1.5, enemy[i].y)
+
+            matrix = MatrixFPSViewRH(matrix, {-player.x, -player.z, -player.y}, -readFloat('[ac_client.exe+0010F4F4]+40'), -readFloat('[ac_client.exe+0010F4F4]+44'), 0)
+            matrix = MatrixPerspectiveFovRH(matrix, fov, screen_width/screen_height, 0, 100)
+
+            local cube = {{-0.5, 0.5, -0.5, 1.0}, {0.5, 0.5, -0.5, 1.0}, {0.5, -0.5, -0.5, 1.0}, {-0.5, -0.5, -0.5, 1.0}, {-0.5, 0.5, -0.5, 1.0},
+                            {-0.5, 0.5, 0.5, 1.0}, {-0.5, -0.5, 0.5, 1.0}, {-0.5, -0.5, -0.5, 1.0}, {-0.5, -0.5, 0.5, 1.0},
+                            {0.5, -0.5, 0.5, 1.0}, {0.5, -0.5, -0.5, 1.0}, {0.5, -0.5, 0.5, 1.0},
+                            {0.5, 0.5, 0.5, 1.0}, {-0.5, 0.5, 0.5, 1.0}, {0.5, 0.5, 0.5, 1.0},
+                            {0.5, 0.5, -0.5, 1.0}}
+
+            for i=1, #cube-1 do
+                local v1 = PreMultiplyVector(matrix, cube[i])
+                local v2 = PreMultiplyVector(matrix, cube[i+1])
+
+                if v1[4] &lt; -0.1 and v2[4] &lt; -0.1 then
+                    v1 = ConvertToNDC(v1)
+                    v2 = ConvertToNDC(v2)
+
+                    v1 = ConvertToWC(v1)
+                    v2 = ConvertToWC(v2)
+
+                    canvas.Pen.Color = 0xFF0000
+                    canvas.line(v1[1], v1[2], v2[1], v2[2])
+                end
+            end
+        end
+
+        if espboxes2d then
+            local matrix = NewMatrix()
+            matrix = MatrixScaling(matrix, 1.5, 3, 1.5)
+            matrix = MatrixRotationY(matrix, -readFloat('[ac_client.exe+0010F4F4]+40'))
+            matrix = MatrixTranslation(matrix, enemy[i].x, enemy[i].z-2, enemy[i].y)
+
+            matrix = MatrixFPSViewRH(matrix, {-player.x, -player.z, -player.y}, -readFloat('[ac_client.exe+0010F4F4]+40'), -readFloat('[ac_client.exe+0010F4F4]+44'), 0)
+            matrix = MatrixPerspectiveFovRH(matrix, fov, screen_width/screen_height, 0, 100)
+
+            local square = {
+                {-1, -1, 0, 1},
+                {1, -1, 0, 1},
+                {1, 1, 0, 1},
+                {-1, 1, 0, 1},
+                {-1, -1, 0, 1}
+            }
+
+            for i=1, #square-1 do
+                local v1 = PreMultiplyVector(matrix, square[i])
+                local v2 = PreMultiplyVector(matrix, square[i+1])
+
+                if v1[4] &lt; -0.1 and v2[4] &lt; -0.1 then
+                    v1 = ConvertToNDC(v1)
+                    v2 = ConvertToNDC(v2)
+
+                    v1 = ConvertToWC(v1)
+                    v2 = ConvertToWC(v2)
+
+                    canvas.Pen.Color = 0x0000FF
+                    canvas.line(v1[1], v1[2], v2[1], v2[2])
+                end
+            end
+        end
+
+        if esplines then
+            local matrix = NewMatrix()
+            matrix = MatrixTranslation(matrix, enemy[i].x, enemy[i].z, enemy[i].y)
+
+            matrix = MatrixFPSViewRH(matrix, {-player.x, -player.z, -player.y}, -readFloat('[ac_client.exe+0010F4F4]+40'), -readFloat('[ac_client.exe+0010F4F4]+44'), 0)
+            matrix = MatrixPerspectiveFovRH(matrix, fov, screen_width/screen_height, 0, 100)
+
+            local vert = {0, 0, 0, 1}
+            vert = PreMultiplyVector(matrix, vert)
+            local w = vert[4]
+
+            if w &lt; -0.1 then
+                vert = ConvertToNDC(vert)
+                vert = ConvertToWC(vert)
+
+                canvas.Pen.Color = 0x00FF00
+                --canvas.line(form.Width/2, form.Height/2, vert[1], vert[2])
+                canvas.line(form.Width/2, form.Height, vert[1], vert[2])
+            end
+        end
+    end
+end
+
+local function ESPhack()
+    if UDF1.ESPHACK.Checked then
+        UpdateMyData()
+        UpdatePlayersData()
+        ESP(UDF1.ESPLINES.Checked, UDF1.ESPBOXES2D.Checked, UDF1.ESPBOXES3D.Checked)
+        --Displays on the screen.
+        img.Picture = pic
+    end
+end
+
+function ESPHACKChange(sender)
+    UDF1.CEGroupBox1.EnableD = sender.Checked
+    if sender.Checked then
+        form.Show()
+        UpdatePos()
+    else
+        form.Hide()
+    end
+end
+
+if t_ESP then t_ESP.destroy(); t_ESP=nil end
+t_ESP = createTimer()
+t_ESP.Interval = 1
+t_ESP.onTimer = ESPhack
+UDF1.Show()
+{$asm}
+[DISABLE]
+{$lua}
+if t_ESP then t_ESP.destroy(); t_ESP=nil end
+if form then form.destroy(); form=nil end
+pic.destroy()
+UDF1.Hide()
+{$asm}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>140</ID>
+              <Description>"Fullbright"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+alloc(fullbright,256)
+
+fullbright:
+  call ac_client.exe+54EF0
+ret
+
+registersymbol(fullbright)
+createthread(fullbright)
+[DISABLE]
+unregistersymbol(fullbright)
+dealloc(fullbright)
+alloc(recalc,256)
+
+recalc:
+  call ac_client.exe+54F70
+ret
+
+createthread(recalc)
+unregistersymbol(recalc)
+dealloc(recalc)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>139</ID>
+              <Description>"Disable Scope"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-21
+  Author : A
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+ 
+aobscanmodule(INJECT,ac_client.exe,80 7D 08 00 0F 85 37 04 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  cmp byte ptr [ebp+08],01
+  jne ac_client.exe+84F4
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 5
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 80 7D 08 00 0F 85 37 04 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+80B3
+
+ac_client.exe+8095: D9 E8              - fld1 
+ac_client.exe+8097: 6A 00              - push 00
+ac_client.exe+8099: 51                 - push ecx
+ac_client.exe+809A: D9 1C 24           - fstp dword ptr [esp]
+ac_client.exe+809D: 6A 03              - push 03
+ac_client.exe+809F: 32 DB              - xor bl,bl
+ac_client.exe+80A1: B8 0C 1C 4E 00     - mov eax,ac_client.exe+E1C0C
+ac_client.exe+80A6: E8 D5 63 01 00     - call ac_client.exe+1E480
+ac_client.exe+80AB: 83 C4 0C           - add esp,0C
+ac_client.exe+80AE: A3 00 CF 51 00     - mov [ac_client.exe+11CF00],eax
+// ---------- INJECTING HERE ----------
+ac_client.exe+80B3: 80 7D 08 00        - cmp byte ptr [ebp+08],00
+// ---------- DONE INJECTING  ----------
+ac_client.exe+80B7: 0F 85 37 04 00 00  - jne ac_client.exe+84F4
+ac_client.exe+80BD: 68 03 03 00 00     - push 00000303
+ac_client.exe+80C2: 68 02 03 00 00     - push 00000302
+ac_client.exe+80C7: FF 15 78 A2 4D 00  - call dword ptr [ac_client.exe+DA278]
+ac_client.exe+80CD: A1 00 CF 51 00     - mov eax,[ac_client.exe+11CF00]
+ac_client.exe+80D2: 8B 48 1C           - mov ecx,[eax+1C]
+ac_client.exe+80D5: 51                 - push ecx
+ac_client.exe+80D6: 68 E1 0D 00 00     - push 00000DE1
+ac_client.exe+80DB: FF 15 48 A2 4D 00  - call dword ptr [ac_client.exe+DA248]
+ac_client.exe+80E1: 68 FF 00 00 00     - push 000000FF
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>103</ID>
+              <Description>"Remove Gun Animation"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-21
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,ac_client.exe,89 B1 84 03 00 00 8B)
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  mov [ecx+00000384],esi
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 89 B1 84 03 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+63704
+
+ac_client.exe+636D9: 89 5E 1C              - mov [esi+1C],ebx
+ac_client.exe+636DC: 39 1D D0 01 51 00     - cmp [ac_client.exe+1101D0],ebx
+ac_client.exe+636E2: 0F 84 79 FF FF FF     - je ac_client.exe+63661
+ac_client.exe+636E8: 8B 46 08              - mov eax,[esi+08]
+ac_client.exe+636EB: 3B 05 F4 F4 50 00     - cmp eax,[ac_client.exe+10F4F4]
+ac_client.exe+636F1: 0F 85 6A FF FF FF     - jne ac_client.exe+63661
+ac_client.exe+636F7: 8B 4E 14              - mov ecx,[esi+14]
+ac_client.exe+636FA: 39 19                 - cmp [ecx],ebx
+ac_client.exe+636FC: E9 53 FF FF FF        - jmp ac_client.exe+63654
+ac_client.exe+63701: 8B 4E 08              - mov ecx,[esi+08]
+// ---------- INJECTING HERE ----------
+ac_client.exe+63704: 89 B1 84 03 00 00     - mov [ecx+00000384],esi
+// ---------- DONE INJECTING  ----------
+ac_client.exe+6370A: 8B 56 0C              - mov edx,[esi+0C]
+ac_client.exe+6370D: FF 46 1C              - inc [esi+1C]
+ac_client.exe+63710: 38 9A 28 01 00 00     - cmp [edx+00000128],bl
+ac_client.exe+63716: 75 09                 - jne ac_client.exe+63721
+ac_client.exe+63718: 8B 46 08              - mov eax,[esi+08]
+ac_client.exe+6371B: 88 98 24 02 00 00     - mov [eax+00000224],bl
+ac_client.exe+63721: 8B 4E 04              - mov ecx,[esi+04]
+ac_client.exe+63724: 8B 04 8D 38 A2 50 00  - mov eax,[ecx*4+ac_client.exe+10A238]
+ac_client.exe+6372B: 3B C3                 - cmp eax,ebx
+ac_client.exe+6372D: 7E 0E                 - jle ac_client.exe+6373D
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>51</ID>
+              <Description>"OpenGL PolygonMode"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>alloc(polygonmode,200)
+
+define(GL_FRONT_AND_BACK, 0x0408)
+define(GL_POINT, 0x1B00)
+define(GL_LINE, 0x1B01)
+define(GL_FILL, 0x1B02)
+
+define(GL_COLOR_BUFFER_BIT, 0x00004000)
+
+[ENABLE]
+label(oWglSwapBuffers)
+label(return)
+
+polygonmode:
+  push GL_LINE
+  push GL_FRONT_AND_BACK
+  call glPolygonMode
+
+  push ebp
+  mov ebp,esp
+  push [ebp+8]
+  call oWglSwapBuffers
+  pop ebp
+
+  push GL_COLOR_BUFFER_BIT
+  call glClear
+
+  ret 4
+
+oWglSwapBuffers:
+  mov edi,edi
+  push ebp
+  mov ebp,esp
+  jmp return
+
+
+wglSwapBuffers:
+  jmp polygonmode
+
+return:
+
+
+[DISABLE]
+
+polygonmode:
+  push GL_FILL
+  push GL_FRONT_AND_BACK
+  call glPolygonMode
+
+  mov edi,edi
+  push ebp
+  mov ebp,esp
+  jmp return
+
+wglSwapBuffers:
+  jmp polygonmode
+
+return:
+
+
+dealloc(polygonmode)
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>147</ID>
+          <Description>"Misc"</Description>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>90</ID>
+              <Description>"Airjump"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{$lua}
+h = "[ac_client.exe+00109B74]+0x69"
+
+[ENABLE]
+timer = createTimer();
+timer.Interval = 100 -- ms
+
+timer.onTimer = function(sender)
+   writeBytes(h,0x01);
+end
+
+[DISABLE]
+if timer then timer.destroy() end
+writeBytes(h,0x01)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>92</ID>
+              <Description>"Radarhack"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+ac_client.exe+9FB3:
+ db 90 90 90 90 90 90
+
+[DISABLE]
+ac_client.exe+9FB3:
+ db 0F 85 4A 01 00 00
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>152</ID>
+              <Description>"Flyhack"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+
+-- Offsets
+local COORDINATE_X = 0x34
+local COORDINATE_Y = 0x38
+local COORDINATE_Z = 0x3C
+local ANGLE_X = 0x40
+local ANGLE_Y = 0x44
+
+local BASE_MY_PLAYER = getAddress('[ac_client.exe+0010F4F4]')
+
+-- Declaration of other variables
+local player -- Structure with all my data
+
+-- Function that updates my player information
+local function UpdateMyData()
+    player = {x = BASE_MY_PLAYER + COORDINATE_X,
+              y = BASE_MY_PLAYER + COORDINATE_Y,
+              z = BASE_MY_PLAYER + COORDINATE_Z,
+              viewMatrix = {x = readFloat(BASE_MY_PLAYER + ANGLE_X)-90,
+                            y = readFloat(BASE_MY_PLAYER + ANGLE_Y)
+              }
+    }
+end
+
+local speed_forward = 0
+local speed_back = 0
+local speed_left = 0
+local speed_right = 0
+local direction1 = "none"
+local direction2 = "none"
+local speed_transaction = 0.02
+local speed = 0.6
+
+function FlyMode()
+
+    --if not readInteger('[ac_client.exe+0010F4F8]') then return end--The function returns if the address does not exist.
+    UpdateMyData()
+
+    local destinyX
+    local destinyY
+    local destinyZ
+    local max_lenght
+
+    destinyZ = math.sin(math.rad(player.viewMatrix.y))
+    max_lenght = math.cos(math.rad(player.viewMatrix.y))
+    destinyY = math.sin(math.rad(player.viewMatrix.x)) * max_lenght
+    destinyX = math.cos(math.rad(player.viewMatrix.x)) * max_lenght
+
+    if direction1 == "forward" then
+       	writeFloat(player.x, readFloat(player.x) + destinyX * speed_forward)
+       	writeFloat(player.y, readFloat(player.y) + destinyY * speed_forward)
+       	writeFloat(player.z, readFloat(player.z) + destinyZ * speed_forward)
+    elseif direction1 == "back" then
+       	writeFloat(player.x, readFloat(player.x) - destinyX * speed_back)
+       	writeFloat(player.y, readFloat(player.y) - destinyY * speed_back)
+       	writeFloat(player.z, readFloat(player.z) - destinyZ * speed_back)
+    end
+
+    if direction2 == "left" then
+       	writeFloat(player.x, readFloat(player.x) + destinyY * speed_left)
+       	writeFloat(player.y, readFloat(player.y) - destinyX * speed_left)
+    elseif direction2 == "right" then
+       	writeFloat(player.x, readFloat(player.x) - destinyY * speed_right)
+       	writeFloat(player.y, readFloat(player.y) + destinyX * speed_right)
+    end
+end
+
+local function CheckKeyFlyMode()
+    if isKeyPressed(VK_W) then
+        if speed_back &gt; 0 then
+            speed_back = speed_back - speed_transaction * 2
+        else
+            if speed_forward &lt; speed then
+                speed_forward = speed_forward + speed_transaction
+            end
+            direction1 = "forward"
+        end
+    elseif isKeyPressed(VK_S) then
+        if speed_forward &gt; 0 then
+            speed_forward = speed_forward - speed_transaction * 2
+        else
+            if speed_back &lt; speed then
+                speed_back = speed_back + speed_transaction
+            end
+            direction1 = "back"
+        end
+    else
+        if speed_forward &lt;= 0 and speed_back &lt;= 0 then
+            direction1 = "none"
+        end
+        if speed_forward &gt; 0 then
+            speed_forward = speed_forward - speed_transaction * 2
+        end
+        if speed_back &gt; 0 then
+            speed_back = speed_back - speed_transaction * 2
+        end
+    end
+
+    if isKeyPressed(VK_A) then
+        if speed_right &gt; 0 then
+            speed_right = speed_right - speed_transaction * 2
+        else
+            if speed_left &lt; speed then
+                speed_left = speed_left + speed_transaction
+            end
+            direction2 = "left"
+        end
+    elseif isKeyPressed(VK_D) then
+        if speed_left &gt; 0 then
+            speed_left = speed_left - speed_transaction * 2
+        else
+            if speed_right &lt; speed then
+                speed_right = speed_right + speed_transaction
+            end
+            direction2 = "right"
+        end
+    else
+        if speed_left &lt;= 0 and speed_right &lt;= 0 then
+            direction2 = "none"
+        end
+        if speed_left &gt; 0 then
+            speed_left = speed_left - speed_transaction * 2
+        end
+        if speed_right &gt; 0 then
+            speed_right = speed_right - speed_transaction * 2
+        end
+    end
+    FlyMode()
+end
+
+if t3 then t3.destroy(); t3=nil end
+t3 = createTimer()
+t3.Interval = 1
+t3.onTimer = CheckKeyFlyMode
+{$asm}
+[DISABLE]
+{$lua}
+if t3 then t3.destroy(); t3=nil end
+{$asm}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>148</ID>
+              <Description>"Speedhack"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : ac_client.exe (paused)
+  Version: 
+  Date   : 2022-02-22
+  Author : A
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+
+ 
+ 
+aobscanmodule(INJECT,ac_client.exe,48 33 FF 85 C0 7E 1D) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  dec eax
+  xor edi,edi
+  test eax,eax
+  jmp return
+
+INJECT:
+  jmp newmem
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT:
+  db 48 33 FF 85 C0
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+5BD7F
+
+ac_client.exe+5BD62: 74 1B              - je ac_client.exe+5BD7F
+ac_client.exe+5BD64: 8B 4E 34           - mov ecx,[esi+34]
+ac_client.exe+5BD67: D9 46 5C           - fld dword ptr [esi+5C]
+ac_client.exe+5BD6A: 8B 56 38           - mov edx,[esi+38]
+ac_client.exe+5BD6D: 89 4E 04           - mov [esi+04],ecx
+ac_client.exe+5BD70: 8B 4E 3C           - mov ecx,[esi+3C]
+ac_client.exe+5BD73: 89 56 08           - mov [esi+08],edx
+ac_client.exe+5BD76: 89 4E 0C           - mov [esi+0C],ecx
+ac_client.exe+5BD79: D8 46 0C           - fadd dword ptr [esi+0C]
+ac_client.exe+5BD7C: D9 5E 0C           - fstp dword ptr [esi+0C]
+// ---------- INJECTING HERE ----------
+ac_client.exe+5BD7F: 48                 - dec eax
+// ---------- DONE INJECTING  ----------
+ac_client.exe+5BD80: 33 FF              - xor edi,edi
+ac_client.exe+5BD82: 85 C0              - test eax,eax
+ac_client.exe+5BD84: 7E 1D              - jle ac_client.exe+5BDA3
+ac_client.exe+5BD86: 8B 15 DC BE 4F 00  - mov edx,[ac_client.exe+FBEDC]
+ac_client.exe+5BD8C: 52                 - push edx
+ac_client.exe+5BD8D: 55                 - push ebp
+ac_client.exe+5BD8E: 8B C6              - mov eax,esi
+ac_client.exe+5BD90: E8 0B F0 FF FF     - call ac_client.exe+5ADA0
+ac_client.exe+5BD95: A1 1C A2 50 00     - mov eax,[ac_client.exe+10A21C]
+ac_client.exe+5BD9A: 47                 - inc edi
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>48</ID>
+              <Description>"Bunnyhop"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+alloc(speedhack,100)
+label(value)
+label(returnhere)
+
+speedhack:
+  fmul dword ptr [value]
+  fmulp st(1),st(0)
+  jmp returnhere
+
+value:
+  dd (float)32
+
+"ac_client.exe"+5B038:
+  jmp speedhack
+
+returnhere:
+
+
+[DISABLE]
+dealloc(speedhack)
+
+"ac_client.exe"+5B038:
+  fmul dword ptr [ebx+50]
+  fmulp st(1),st(0)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>158</ID>
+              <Description>"NoClip"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+alloc(newmem,2048)
+label(originalcode_x)
+label(originalcode_y)
+label(returnhere_x)
+label(returnhere_y)
+label(cheat)
+
+newmem:
+
+  originalcode_x:
+    fstp dword ptr [cheat]
+    //fstp dword ptr [ebx+04]
+    fld dword ptr [ebx+18]
+    jmp returnhere_x
+
+  originalcode_y:
+    fstp dword ptr [cheat]
+    //fstp dword ptr [ebx+08]
+    fld dword ptr [esp+18]
+    jmp returnhere_y
+
+  cheat:
+    dd 0
+
+"ac_client.exe"+5B835:
+    jmp originalcode_x
+  returnhere_x:
+
+"ac_client.exe"+5B88B:
+    jmp originalcode_y
+  returnhere_y:
+
+
+[DISABLE]
+dealloc(newmem)
+
+"ac_client.exe"+5B835:
+  fstp dword ptr [ebx+04]
+  fld dword ptr [ebx+18]
+  //Alt: db D9 5B 04 D9 43 08
+
+"ac_client.exe"+5B88B:
+  fstp dword ptr [ebx+08]
+  fld dword ptr [esp+18]
+  //Alt: db D9 5B 08 D9 44 24 18
+</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Toggle Activation</Action>
+                  <Keys>
+                    <Key>221</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>150</ID>
+              <Description>"Edit Mode"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+alloc(edit,128)
+
+edit:
+  call ac_client.exe+4C9B0
+ret
+
+registersymbol(edit)
+createthread(edit)
+[DISABLE]
+unregistersymbol(edit)
+dealloc(edit)
+alloc(unedit,128)
+
+unedit:
+  call ac_client.exe+4C9B0
+ret
+
+createthread(unedit)
+unregistersymbol(unedit)
+dealloc(unedit)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>127</ID>
+              <Description>"Timer"</Description>
+              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>123</ID>
+                  <Description>"Shoot Timer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : A
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(INJECT,ac_client.exe,89 0A 8B 76 14) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  mov [edx],ecx
+  mov esi,[esi+14]
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT:
+  db 89 0A 8B 76 14
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+637E4
+
+ac_client.exe+637C8: 53                    - push ebx
+ac_client.exe+637C9: 8D 44 24 28           - lea eax,[esp+28]
+ac_client.exe+637CD: 50                    - push eax
+ac_client.exe+637CE: 8D 4C 24 20           - lea ecx,[esp+20]
+ac_client.exe+637D2: 51                    - push ecx
+ac_client.exe+637D3: 8B CE                 - mov ecx,esi
+ac_client.exe+637D5: FF D2                 - call edx
+ac_client.exe+637D7: 8B 46 0C              - mov eax,[esi+0C]
+ac_client.exe+637DA: 0F BF 88 0A 01 00 00  - movsx ecx,word ptr [eax+0000010A]
+ac_client.exe+637E1: 8B 56 18              - mov edx,[esi+18]
+// ---------- INJECTING HERE ----------
+ac_client.exe+637E4: 89 0A                 - mov [edx],ecx
+// ---------- DONE INJECTING  ----------
+ac_client.exe+637E6: 8B 76 14              - mov esi,[esi+14]
+ac_client.exe+637E9: FF 0E                 - dec [esi]
+ac_client.exe+637EB: 57                    - push edi
+ac_client.exe+637EC: 8B 7C 24 14           - mov edi,[esp+14]
+ac_client.exe+637F0: 8D 74 24 28           - lea esi,[esp+28]
+ac_client.exe+637F4: E8 87 E3 FF FF        - call ac_client.exe+61B80
+ac_client.exe+637F9: 5F                    - pop edi
+ac_client.exe+637FA: 5E                    - pop esi
+ac_client.exe+637FB: B0 01                 - mov al,01
+ac_client.exe+637FD: 5B                    - pop ebx
+}
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>124</ID>
+                  <Description>"Reload Timer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,ac_client.exe,01 10 8B 46 10) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  add [eax],edx
+  mov eax,[esi+10]
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 01 10 8B 46 10
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+61E20
+
+ac_client.exe+61DFA: 8B 4E 08              - mov ecx,[esi+08]
+ac_client.exe+61DFD: 53                    - push ebx
+ac_client.exe+61DFE: 8B 1D AC 9E 50 00     - mov ebx,[ac_client.exe+109EAC]
+ac_client.exe+61E04: 51                    - push ecx
+ac_client.exe+61E05: E8 96 D7 FF FF        - call ac_client.exe+5F5A0
+ac_client.exe+61E0A: 8B 15 AC 9E 50 00     - mov edx,[ac_client.exe+109EAC]
+ac_client.exe+61E10: 8B 4E 0C              - mov ecx,[esi+0C]
+ac_client.exe+61E13: 8B 46 18              - mov eax,[esi+18]
+ac_client.exe+61E16: 89 56 20              - mov [esi+20],edx
+ac_client.exe+61E19: 0F BF 91 08 01 00 00  - movsx edx,word ptr [ecx+00000108]
+// ---------- INJECTING HERE ----------
+ac_client.exe+61E20: 01 10                 - add [eax],edx
+// ---------- DONE INJECTING  ----------
+ac_client.exe+61E22: 8B 46 10              - mov eax,[esi+10]
+ac_client.exe+61E25: 8B 4E 0C              - mov ecx,[esi+0C]
+ac_client.exe+61E28: 8B 10                 - mov edx,[eax]
+ac_client.exe+61E2A: 0F BF 89 18 01 00 00  - movsx ecx,word ptr [ecx+00000118]
+ac_client.exe+61E31: 8B 46 14              - mov eax,[esi+14]
+ac_client.exe+61E34: 2B 08                 - sub ecx,[eax]
+ac_client.exe+61E36: 83 C4 04              - add esp,04
+ac_client.exe+61E39: 3B CA                 - cmp ecx,edx
+ac_client.exe+61E3B: 7C 02                 - jl ac_client.exe+61E3F
+ac_client.exe+61E3D: 8B CA                 - mov ecx,edx
+}
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>125</ID>
+                  <Description>"Grenade Timer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,ac_client.exe,89 0A 8B 46 08) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  mov [edx],ecx
+  mov eax,[esi+08]
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 89 0A 8B 46 08
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+63387
+
+ac_client.exe+63361: E8 6A 14 00 00        - call ac_client.exe+647D0
+ac_client.exe+63366: 8B 56 08              - mov edx,[esi+08]
+ac_client.exe+63369: 8B 1D AC 9E 50 00     - mov ebx,[ac_client.exe+109EAC]
+ac_client.exe+6336F: 52                    - push edx
+ac_client.exe+63370: E8 2B C2 FF FF        - call ac_client.exe+5F5A0
+ac_client.exe+63375: 8B 46 14              - mov eax,[esi+14]
+ac_client.exe+63378: FF 08                 - dec [eax]
+ac_client.exe+6337A: 8B 46 0C              - mov eax,[esi+0C]
+ac_client.exe+6337D: 0F BF 88 0A 01 00 00  - movsx ecx,word ptr [eax+0000010A]
+ac_client.exe+63384: 8B 56 18              - mov edx,[esi+18]
+// ---------- INJECTING HERE ----------
+ac_client.exe+63387: 89 0A                 - mov [edx],ecx
+// ---------- DONE INJECTING  ----------
+ac_client.exe+63389: 8B 46 08              - mov eax,[esi+08]
+ac_client.exe+6338C: 89 B0 84 03 00 00     - mov [eax+00000384],esi
+ac_client.exe+63392: 8B 44 24 14           - mov eax,[esp+14]
+ac_client.exe+63396: C7 46 34 01 00 00 00  - mov [esi+34],00000001
+ac_client.exe+6339D: 8B 76 28              - mov esi,[esi+28]
+ac_client.exe+633A0: 83 C4 04              - add esp,04
+ac_client.exe+633A3: E8 C8 F8 FF FF        - call ac_client.exe+62C70
+ac_client.exe+633A8: 5B                    - pop ebx
+ac_client.exe+633A9: 5E                    - pop esi
+ac_client.exe+633AA: 59                    - pop ecx
+}
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>126</ID>
+                  <Description>"Knife Timer"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : ac_client.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : Smint
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,ac_client.exe,89 0A B0 01 5B) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+//  mov [edx],ecx
+  mov al,01
+  pop ebx
+  jmp return
+
+INJECT:
+  jmp code
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 89 0A B0 01 5B
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ac_client.exe+64514
+
+ac_client.exe+644F7: 8B CF                 - mov ecx,edi
+ac_client.exe+644F9: FF D2                 - call edx
+ac_client.exe+644FB: 53                    - push ebx
+ac_client.exe+644FC: 8D 74 24 10           - lea esi,[esp+10]
+ac_client.exe+64500: E8 7B D6 FF FF        - call ac_client.exe+61B80
+ac_client.exe+64505: 8B 47 0C              - mov eax,[edi+0C]
+ac_client.exe+64508: 8B 57 18              - mov edx,[edi+18]
+ac_client.exe+6450B: 0F BF 88 0A 01 00 00  - movsx ecx,word ptr [eax+0000010A]
+ac_client.exe+64512: 5F                    - pop edi
+ac_client.exe+64513: 5E                    - pop esi
+// ---------- INJECTING HERE ----------
+ac_client.exe+64514: 89 0A                 - mov [edx],ecx
+// ---------- DONE INJECTING  ----------
+ac_client.exe+64516: B0 01                 - mov al,01
+ac_client.exe+64518: 5B                    - pop ebx
+ac_client.exe+64519: 8B E5                 - mov esp,ebp
+ac_client.exe+6451B: 5D                    - pop ebp
+ac_client.exe+6451C: C2 04 00              - ret 0004
+ac_client.exe+6451F: CC                    - int 3 
+ac_client.exe+64520: 8B 41 08              - mov eax,[ecx+08]
+ac_client.exe+64523: 8B 90 74 03 00 00     - mov edx,[eax+00000374]
+ac_client.exe+64529: 56                    - push esi
+ac_client.exe+6452A: 8B 72 0C              - mov esi,[edx+0C]
+}
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>119</ID>
+          <Description>"Pointers (Freeze)"</Description>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1" moDeactivateChildrenAsWell="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>2</ID>
+              <Description>"Unlimited Health (Freeze)"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>0000FF</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>"ac_client.exe"+00109B74</Address>
+              <Offsets>
+                <Offset>F8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>18</ID>
+              <Description>"Unlimited Vest (Freeze)"</Description>
+              <Color>808080</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>"ac_client.exe"+00109B74</Address>
+              <Offsets>
+                <Offset>FC</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9</ID>
+              <Description>"Unlimited Grenades (Freeze)"</Description>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>"ac_client.exe"+00109B74</Address>
+              <Offsets>
+                <Offset>158</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>11</ID>
+              <Description>"Ammo (Freeze)"</Description>
+              <Options moRecursiveSetValue="1" moAlwaysHideChildren="1" moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>404080</Color>
+              <GroupHeader>1</GroupHeader>
+              <Address/>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>5</ID>
+                  <Description>"MTP-57 Ammo (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>150</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>0</ID>
+                  <Description>"A-ARD/10 Ammo (Freeze)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>148</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10</ID>
+                  <Description>"AD-81 Ammo (Freeze)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>14C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>6</ID>
+                  <Description>"MK-77 Ammo (Freeze)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>13C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>8</ID>
+                  <Description>"Akimbo Ammo (Freeze)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>15C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1</ID>
+                  <Description>"TMP-MaA Ammo (Freeze)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>140</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>7</ID>
+                  <Description>"V-19 Ammo (Freeze)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>144</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>64</ID>
+              <Description>"Magazine (Freeze)"</Description>
+              <Options moRecursiveSetValue="1" moAlwaysHideChildren="1" moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+              <Color>404080</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>63</ID>
+                  <Description>"MTP-57 Magazine (Freeze)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>128</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>70</ID>
+                  <Description>"A-ARD/10 Magazine (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>120</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>69</ID>
+                  <Description>"AD-81 Magazine (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>124</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>68</ID>
+                  <Description>"MK-77 Magazine (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>114</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>72</ID>
+                  <Description>"Akimbo Magazine (Freeze)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>134</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>67</ID>
+                  <Description>"TMP-MaA Magazine (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>118</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>66</ID>
+                  <Description>"V-19 Magazine (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>11C</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>53</ID>
+              <Description>"Timers (Freeze)"</Description>
+              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+              <Color>FF8000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>54</ID>
+                  <Description>"MTP-57 Timer (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>178</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>55</ID>
+                  <Description>"A-ARD/10 Timer (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>170</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>56</ID>
+                  <Description>"AD-81 Timer (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>174</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>57</ID>
+                  <Description>"MK-77 Timer (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>164</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>58</ID>
+                  <Description>"TMP-MaA Timer (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>168</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>59</ID>
+                  <Description>"V-19 Timer (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>16C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>60</ID>
+                  <Description>"Knife Timer (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>160</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>61</ID>
+                  <Description>"Grenade Timer (Freeze)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>"ac_client.exe"+00109B74</Address>
+                  <Offsets>
+                    <Offset>180</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>edi_val</Name>
+      <Address>3CA0000</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>speedModifier</Name>
+      <Address>00650000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <Comments>Info about this table:
+</Comments>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>"ac_client.exe"+71FD</Address>
+      <Comment>%s
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"ac_client.exe"+ADB3</Address>
+      <Comment>%s
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"ac_client.exe"+ADB7</Address>
+      <Comment>%s
+</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>
